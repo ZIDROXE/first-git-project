@@ -1,10 +1,10 @@
 const prompt = require('prompt-sync')();
 
-let nom = prompt("Quel est votre nom ?");
-let prenom = prompt("Quel est votre prénom ?");
-let age = prompt("Quel est votre âge ?");
-let sexe = prompt("Quel est votre sexe (M/F) ?");
-let email = prompt("Quelle est votre adresse e-mail ?");
+const nom = prompt("Quel est votre nom ?");
+const prenom = prompt("Quel est votre prénom ?");
+const age = prompt("Quel est votre âge ?");
+const sexe = prompt("Quel est votre sexe (M/F) ?");
+const email = prompt("Quelle est votre adresse e-mail ?");
 
 console.log(`Voici vos informations :
     -nom = ${nom};
