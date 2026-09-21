@@ -9,7 +9,7 @@ while(i < numberelment){
     i++;
 }
 let rounds = 0;
-while(rounds < numbers.length - 1){
+while(rounds < numbers.length){
      let i = 0;
     while(i < numbers.length - 1 - rounds){
         if(numbers[i] > numbers[i + 1]){
