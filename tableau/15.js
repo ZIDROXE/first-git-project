@@ -19,7 +19,7 @@ for(i = 0; i < tab1.length; i++)
 {
     tab1[i] = numberElement;
 }
-for(j = 0; j < tab2.length; j++);{
+for(j = 0; j < tab2.length; j++){
     tab2[j] = tab1[i];
     i++;
 }

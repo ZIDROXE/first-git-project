@@ -1,18 +1,16 @@
-const prompt = require('prompt-sync')();
+const num = [233, 333, 1, 23, 4, 5];
 
-const numberElment = parseInt(prompt("enter number of element :"));
+let max = num[0];
+let max2 = num[1];
 
-const numbers = [];
-let i = 0;
-while(i < numberElment){
-    numbers[i] = parseInt(prompt(`element ${i + 1}:`));
-    i++;
-}
-
-let max = numbers[0];
-for(let i = 0; i < numbers.length; i++){
-    if(max < numbers[i]){
-        max = numbers[i];
+for(let i = 1; i < num.length; i++){
+    if(num[i] > max){
+        max2 = max;
+        max = num[i];
+    }
+    else if(num[i] > max2){
+        max2 = num[i];
     }
 }
-console.log(max);
+
+console.log(max2);

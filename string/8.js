@@ -4,7 +4,7 @@ const text = prompt("enter you're text : ");
 let lower = "";
 let i = 0;
 while(text[i] !== undefined){
-    if(text[i] >= "A" && text[i]<= "Z"){
+    if(text[i] >= "A" && text[i] <= "Z"){
       let code = text.charCodeAt(i);
       code += 32;
       let numTochar = String.fromCharCode(code);
