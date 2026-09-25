@@ -1,4 +1,3 @@
-
 const readline = require('readline');
 
 // Interface pour la lecture dans la console
