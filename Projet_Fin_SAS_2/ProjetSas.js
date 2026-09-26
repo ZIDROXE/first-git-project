@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')();
-const candidats = [];
-    /*{
+const candidats = [
+    {
         cin: "AB123456",
         nom: "Boushaba",
         prenom: "Soufiane",
@@ -21,11 +21,11 @@ const candidats = [];
     },
 
     {
-        cin: "CD234567",
-        nom: "Alaoui",
-        prenom: "Yassine",
-        partiPolitique: "Parti A",
-        age: 35,
+        cin: "G789652",
+        nom: "Abdelilah",
+        prenom: "sadik",
+        partiPolitique: "Indépendant",
+        age: 22,
         electeurs: [
             "EL200001",
             "EL200002",
@@ -71,19 +71,6 @@ const candidats = [];
     },
 
     {
-        cin: "IJ567890",
-        nom: "Chraibi",
-        prenom: "Hamza",
-        partiPolitique: "Indépendant",
-        age: 29,
-        electeurs: [
-            "EL500001",
-            "EL500002",
-            "EL500003"
-        ]
-    },
-
-    {
         cin: "KL678901",
         nom: "Fassi",
         prenom: "Karim",
@@ -119,18 +106,6 @@ const candidats = [];
     },
 
     {
-        cin: "OP890123",
-        nom: "Amrani",
-        prenom: "Ayoub",
-        partiPolitique: "Parti A",
-        age: 33,
-        electeurs: [
-            "EL800001",
-            "EL800002"
-        ]
-    },
-
-    {
         cin: "QR901234",
         nom: "Berrada",
         prenom: "Anas",
@@ -148,7 +123,7 @@ const candidats = [];
         cin: "ST012345",
         nom: "Naciri",
         prenom: "Reda",
-        partiPolitique: "Indépendant",
+        partiPolitique: "Parti c",
         age: 36,
         electeurs: [
             "EL1000011",
@@ -191,11 +166,11 @@ const candidats = [];
             "EL120001"
         ]
     }
-];*/
+];
 
 //=========================nzido candidat wa7d====================================
-function AjouterCandidat(){
-    console.log(`---ajouter un nouveau condidat---`);
+function ajoutercandidat(){
+    console.log(`\n---ajouter un nouveau condidat---`);
     let cin = prompt("entrez le CIN du condidat: ");
     let nom = prompt("Entrez le Nom: ");
     let prenom = prompt("Entrez le Prénom: ");
@@ -213,18 +188,18 @@ function AjouterCandidat(){
   candidats[candidats.length] = candidat;
 }
 //================================= nzido bzaf dya candidat =====================
-function AjouterPluCandidats(){
-    console.log(`---ajouter plusieur candidats---`);
+function ajouterplucandidats(){
+    console.log(`\n---ajouter plusieur candidats---`);
     let numberCondidat = parseInt(prompt("Combien de candidats voulez-vous ajouter :"));
     let i = 0;
     while(i < numberCondidat){
             console.log(`     ---candidat--- ${i + 1} / ${numberCondidat}`);
-            AjouterCandidat();
+            ajoutercandidat();
         i++;
     }
 }
 //=================fonction kinkhtaro mnha l case librina fl affichage====================
-function AfficherCandidats(){
+function affichagechoix(){
 
 console.log(`
     --- Affichage des Candidats ---
@@ -235,29 +210,41 @@ console.log(`
 let affichagechoix = parseInt(prompt("choisissez une option(1-3): "));
 switch(affichagechoix){
     case 1:
-        AfficherTousLesCandidats();
+        affichertouslescandidats();
         break;
     case 2:
-        TrierCandidats();
+        triercandidats();
         break;
     case 3:
-        FiltrerCandidats();
+        filtrercandidats();
         break;
     default:
         console.log("Choix invalide");
 }
 }
 //=======================fonction kit afiichi lina ga3 les condidat========================
-function  AfficherTousLesCandidats(){
-
-    console.table(candidats);
+function  affichertouslescandidats(){
+    console.log("\n-------------------------------------");
+    for(let i = 0; i < candidats.length; i++)
+    {
+        console.log(`
+    Candidat ${i + 1}
+    CIN : ${candidats[i].cin}
+    Nom : ${candidats[i].nom}
+    Prénom : ${candidats[i].prenom}
+    Parti politique : ${candidats[i].partiPolitique}
+    Age : ${candidats[i].age}
+    Nombre de votes : ${candidats[i].electeurs.length}
+----------------------------------------
+`);
+}
 }
 //==============fonction kit sorti lina condidat par nombre de votes=====================
-function TrierCandidats(){
+function triercandidats(){
     
     let tmp;
-    for(let round = 0; round < candidats.length; i++){
-        for(i = 0; i < candidats.length - 1 - round; i++){
+    for(let round = 0; round < candidats.length; round++){
+        for(let i = 0; i < candidats.length - 1 - round; i++){
             if(candidats[i].electeurs.length < candidats[i + 1].electeurs.length){
                 tmp = candidats[i];
                 candidats[i] = candidats[i + 1];
@@ -265,11 +252,82 @@ function TrierCandidats(){
             }
         }
     }
-    console.log("=============Candidats triés par nombre de votes (Décroissant) :===========");
-    console.table(candidats);
+    console.log("\n=============Candidats triés par nombre de votes (Décroissant) :===========");
+    for(let i = 0; i < candidats.length; i++)
+    {
+       console.log(`
+    place: ${i + 1}
+    CIN : ${candidats[i].cin}
+    Nom : ${candidats[i].nom}
+    Prénom : ${candidats[i].prenom}
+    Parti politique : ${candidats[i].partiPolitique}
+    Age : ${candidats[i].age}
+    Nombre de votes : ${candidats[i].electeurs.length}
+----------------------------------------
+`);
+    }
 }
+//===========================filter par partie politique================================
+function filtrercandidats(){
 
-//=============================== Menu choix ==================================================
+    const parti = prompt("Entrez le parti politique :");
+    console.log(`\n------ candidats du parti ${parti} -------`);
+
+    let trouveparti = false;
+    for(let i = 0; i < candidats.length; i++){
+        if(parti === candidats[i].partiPolitique){
+            console.log(`
+    Candidat : ${i + 1}
+    CIN : ${candidats[i].cin}
+    Nom : ${candidats[i].nom}
+    Prénom : ${candidats[i].prenom}
+    Parti politique : ${candidats[i].partiPolitique}
+    Age : ${candidats[i].age}
+    Nombre de votes : ${candidats[i].electeurs.length}
+----------------------------------------
+`);
+            trouveparti = true;
+        }
+    }
+
+    if(trouveparti === false){
+        console.log("Aucun candidat trouvé pour ce parti.");
+    }
+}
+//==============vote 3la condidat ocheck wach cin dyalk deja votez=================
+function votecandidat(){
+console.log("\n--- Vote Électoral ---");
+const cinelecteur = prompt("Entrez votre CIN (Électeur) :");
+
+let dejaVote = false;
+for(let i = 0; i < candidats.length; i++){
+    for(let j = 0; j < candidats[i].electeurs.length; j++){
+        if(cinelecteur === candidats[i].electeurs[j]){
+            dejaVote = true;
+            break;
+        }
+    }
+}
+if(dejaVote === true){
+    console.log("Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau");
+}
+else{
+let trouvecin = false;
+const cincondidat = prompt("enterz le cin de condidat librti t voti 3lih:");
+for(let i = 0; i < candidats.length; i++){
+        if(cincondidat === candidats[i].cin){
+              candidats[i].electeurs[candidats[i].electeurs.length] = cinelecteur;
+                console.log(`Votre vote pour ${candidats[i].nom} a été enregistré avec succès !`);
+             trouvecin = true;
+             break;
+            }
+}
+if(trouvecin === false) {
+    console.log("Candidat non trouvé avec ce CIN");
+    }
+}
+}
+//=============================== Menu choix ================================================== 
 let choix = 0;
 while(choix != 9)
 {
@@ -280,22 +338,24 @@ while(choix != 9)
 1. Ajouter un nouveau candidat
 2. Ajouter plusieurs candidats à la fois
 3. Afficher la liste des candidats
+4. Voter pour un candidat
 9.Quitter l'application
 ==================================================`);
 choix = parseInt(prompt("Choisissez une option (1-8 ou 9 pour quitter) :"));
     
 switch(choix){
     case 1: 
-        AjouterCandidat();
+        ajoutercandidat();
         break;
     case 2:
-        AjouterPluCandidats();
+        ajouterplucandidats();
         break;
     case 3:
-        AfficherCandidats();
+        affichagechoix();
         break;
     case 4:
-
+        votecandidat()
+            break;
     case 9:
         console.log("Merci d'avoir utilisé l'application. Au revoir !")
         break;
