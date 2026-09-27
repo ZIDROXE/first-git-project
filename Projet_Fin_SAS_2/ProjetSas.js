@@ -22,8 +22,8 @@ const candidats = [
 
     {
         cin: "G789652",
-        nom: "Abdelilah",
-        prenom: "sadik",
+        nom: "sadik",
+        prenom: "Abdelilah",
         partiPolitique: "Indépendant",
         age: 22,
         electeurs: [
@@ -37,7 +37,7 @@ const candidats = [
         ]
     },
 
-    {
+    /*{
         cin: "EF345678",
         nom: "Bennani",
         prenom: "Amine",
@@ -137,26 +137,6 @@ const candidats = [
     },
 
     {
-        cin: "UV123789",
-        nom: "Tahiri",
-        prenom: "Ismail",
-        partiPolitique: "Parti B",
-        age: 44,
-        electeurs: [
-            "EL110001",
-            "EL110002",
-            "EL110003",
-            "EL110004",
-            "EL110005",
-            "EL110006",
-            "EL110007",
-            "EL110008",
-            "EL110009",
-            "EL110010"
-        ]
-    },
-
-    {
         cin: "WX234890",
         nom: "Mansouri",
         prenom: "Zakaria",
@@ -165,7 +145,7 @@ const candidats = [
         electeurs: [
             "EL120001"
         ]
-    }
+    }*/
 ];
 
 //=========================nzido candidat wa7d====================================
@@ -219,15 +199,14 @@ function affichagechoix() {
             filtrercandidats();
             break;
         default:
-            console.log("Choix invalide");
+            console.log("*** Choix invalide ***");
     }
 }
 //=======================fonction kit afiichi lina ga3 les condidat========================
 function affichertouslescandidats() {
     console.log("\n-------------------------------------");
     for (let i = 0; i < candidats.length; i++) {
-        console.log(`
-    Candidat ${i + 1}
+        console.log(`    Candidat ${i + 1}
     CIN : ${candidats[i].cin}
     Nom : ${candidats[i].nom}
     Prénom : ${candidats[i].prenom}
@@ -238,9 +217,8 @@ function affichertouslescandidats() {
 `);
     }
 }
-//==============fonction kit sorti lina condidat par nombre de votes=====================
-function triercandidats() {
-
+//====================================== sort fonction ==============================================
+function sortcondidat() {
     let tmp;
     for (let round = 0; round < candidats.length; round++) {
         for (let i = 0; i < candidats.length - 1 - round; i++) {
@@ -251,10 +229,14 @@ function triercandidats() {
             }
         }
     }
+}
+//==============fonction kit sorti lina condidat par nombre de votes=====================
+function triercandidats() {
+    sortcondidat();
+
     console.log("\n============= Candidats triés par nombre de votes (Décroissant) :===========");
     for (let i = 0; i < candidats.length; i++) {
-        console.log(`
-    place: ${i + 1}
+        console.log(`    place: ${i + 1}
     CIN : ${candidats[i].cin}
     Nom : ${candidats[i].nom}
     Prénom : ${candidats[i].prenom}
@@ -289,7 +271,7 @@ function filtrercandidats() {
     }
 
     if (trouveparti === false) {
-        console.log("Aucun candidat trouvé pour ce parti.");
+        console.log("*** Aucun candidat trouvé pour ce parti. ***");
     }
 }
 //==============vote 3la condidat ocheck wach cin dyalk deja votez=================
@@ -307,7 +289,7 @@ function votecandidat() {
         }
     }
     if (dejaVote === true) {
-        console.log("Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau");
+        console.log("* Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau *");
     }
     else {
         let trouvecin = false;
@@ -321,7 +303,7 @@ function votecandidat() {
             }
         }
         if (trouvecin === false) {
-            console.log("Candidat non trouvé avec ce CIN");
+            console.log(" *** Candidat non trouvé avec ce CIN ***");
         }
     }
 }
@@ -349,28 +331,80 @@ function modifiercandidat() {
                     candidats[i].age = nouveauage;
                     break;
                 default:
-                    console.log("option invalide");
+                    console.log("*** option invalide *** ");
             }
         }
     }
     if (trouvecin === false) {
-        console.log(" Candidat non trouvé.");
+        console.log("*** Candidat non trouvé. ***");
     }
 }
 //================================suppremer candidat============================================
-    function suppremercandidt(){
-        let cinsuppremer = prompt("Entrez le CIN du candidat à supprimer :");
-        
-        trouvecin = false;
-        for(let i = 0; i < candidats.length; i++){
-            if(cinsuppremer === candidats[i].cin){
-                trouvecin = true;
+function suppremercandidt() {
+    let cinsuppremer = prompt("Entrez le CIN du candidat à supprimer :");
+
+    let trouvecin = false;
+    for (let i = 0; i < candidats.length; i++) {
+        if (cinsuppremer === candidats[i].cin) {
+            trouvecin = true;
+            const candidatsupreme = candidats[i];
+
+            for (let j = i; j < candidats.length - 1; j++) {
+                candidats[j] = candidats[j + 1];
             }
-        }
-        if(trouvecin === false){
-            console.log("Candidat non trouvé.")
+            candidats.length = candidats.length - 1;
+            console.log(`* le candidat ${candidatsupreme.nom} ${candidatsupreme.prenom} a été supprimé.`);
+            break;
         }
     }
+    if (trouvecin === false) {
+        console.log("*** candidat nom trouve ***");
+    }
+}
+//==========================rechercher candidat par nom ==============================
+function recherchercandidat() {
+    let nomRecherche = prompt("Entrez le nom du candidat : ");
+    let trouvenom = false;
+
+    for (let i = 0; i < candidats.length; i++) {
+        if (candidats[i].nom === nomRecherche) {
+            console.log(`
+     CIN : ${candidats[i].cin}
+     Nom : ${candidats[i].nom}
+     Prénom : ${candidats[i].prenom}
+     Parti politique : ${candidats[i].partiPolitique}
+     Age : ${candidats[i].age}
+     Nombre de votes : ${candidats[i].electeurs.length}`);
+            trouvenom = true;
+            break;
+        }
+    }
+    if (trouvenom === false) {
+        console.log("*** Aucun candidat trouvé ***");
+    }
+}
+//============================ Statistiques de l'élection ========================
+function statistiquesElection() {
+    console.log("=============== Statistiques de l'élection ===============");
+    console.log(`\n* nombre total de candidats: ${candidats.length}`);
+
+    let totalvotes = 0;
+    for (let i = 0; i < candidats.length; i++) {
+        totalvotes += candidats[i].electeurs.length;
+    }
+    console.log(`* Nombre total de votes exprimés : ${totalvotes}`);
+
+    sortcondidat();
+        console.log("\n* top 3 des candidats :");
+    let topcandidats  = 3;
+    if(candidats.length < 3){
+        topcandidats = candidats.length;
+    }
+    for (let i = 0; i < topcandidats ; i++) {
+        console.log(`  ${i + 1}. ${candidats[i].nom} ${candidats[i].prenom} | ${candidats[i].electeurs.length} votes`);
+    }
+
+}
 //=============================== Menu choix ================================================== 
 let choix = 0;
 while (choix != 9) {
@@ -384,6 +418,8 @@ while (choix != 9) {
 |  4. Voter pour un candidat                     |
 |  5. Modifier les informations d'un candidat    |
 |  6. Supprimer un candidat                      |
+|  7. Rechercher des candidats par Nom           |
+|  8. Afficher les Statistiques de l'élection    |
 |  9.Quitter l'application                       |
 ==================================================`);
     choix = parseInt(prompt("Choisissez une option (1-8 ou 9 pour quitter) :"));
@@ -405,11 +441,18 @@ while (choix != 9) {
             modifiercandidat();
             break;
         case 6:
-                suppremercandidt();
+            suppremercandidt();
+            break;
+        case 7:
+            recherchercandidat();
+            break;
+        case 8:
+            statistiquesElection();
+            break;
         case 9:
-            console.log("Merci d'avoir utilisé l'application. Au revoir !")
+            console.log("Merci d'avoir utilisé l'application. Au revoir !");
             break;
         default:
-            console.log("Option invalide. Veuillez réessayer.")
+            console.log("Option invalide. Veuillez réessayer.");
     }
 }
