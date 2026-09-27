@@ -330,11 +330,12 @@ function suppremercandidt() {
         if (cinsuppremer === candidats[i].cin) {
             trouvecin = true;
             const candidatsupreme = candidats[i];
-
+        //=========splice algorithm=========//
             for (let j = i; j < candidats.length - 1; j++) {
                 candidats[j] = candidats[j + 1];
             }
             candidats.length = candidats.length - 1;
+        //====================================//
             console.log(`* le candidat ${candidatsupreme.nom} ${candidatsupreme.prenom} a été supprimé.`);
             break;
         }
@@ -382,7 +383,7 @@ function statistiquesElection() {
     if (candidats.length < 3) {
         topcandidats = candidats.length;
     }
-    for (let i = 0; i < topcandidats; i++) {
+    for (let i = 0; i < 3; i++) {
         console.log(`  ${i + 1}. ${candidats[i].nom} ${candidats[i].prenom} | ${candidats[i].electeurs.length} votes`);
     }
     //=============================number candidats par partipolitique ==============================
@@ -390,7 +391,7 @@ function statistiquesElection() {
         let object = {};
         for (let i = 0; i < candidats.length; i++) {
             if (object[candidats[i].partiPolitique] === undefined) {
-                object[candidats[i].partiPolitique] = 1;
+                    object[candidats[i].partiPolitique] = 1;
             }
             else {
                 object[candidats[i].partiPolitique] += 1;
