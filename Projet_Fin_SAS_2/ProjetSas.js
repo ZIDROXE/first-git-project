@@ -37,7 +37,7 @@ const candidats = [
         ]
     },
 
-    /*{
+    {
         cin: "EF345678",
         nom: "Bennani",
         prenom: "Amine",
@@ -120,23 +120,6 @@ const candidats = [
     },
 
     {
-        cin: "ST012345",
-        nom: "Naciri",
-        prenom: "Reda",
-        partiPolitique: "Parti c",
-        age: 36,
-        electeurs: [
-            "EL1000011",
-            "EL1000012",
-            "EL1000013",
-            "EL1000014",
-            "EL1000015",
-            "EL1000016",
-            "EL1000017"
-        ]
-    },
-
-    {
         cin: "WX234890",
         nom: "Mansouri",
         prenom: "Zakaria",
@@ -145,10 +128,10 @@ const candidats = [
         electeurs: [
             "EL120001"
         ]
-    }*/
+    }
 ];
 
-//=========================nzido candidat wa7d====================================
+//===========================nzido candidat wa7d====================================
 function ajoutercandidat() {
     console.log(`\n---ajouter un nouveau condidat---`);
     let cin = prompt("entrez le CIN du condidat: ");
@@ -269,7 +252,6 @@ function filtrercandidats() {
             trouveparti = true;
         }
     }
-
     if (trouveparti === false) {
         console.log("*** Aucun candidat trouvé pour ce parti. ***");
     }
@@ -293,7 +275,7 @@ function votecandidat() {
     }
     else {
         let trouvecin = false;
-        const cincondidat = prompt("enterz le cin de condidat librti t voti 3lih:");
+        const cincondidat = prompt("Entrez le CIN du candidat pour lequel vous voulez voter :");
         for (let i = 0; i < candidats.length; i++) {
             if (cincondidat === candidats[i].cin) {
                 candidats[i].electeurs[candidats[i].electeurs.length] = cinelecteur;
@@ -327,7 +309,7 @@ function modifiercandidat() {
                     candidats[i].partiPolitique = nouveauparti;
                     break;
                 case 2:
-                    let nouveauage = parseInt(prompt("\ entrez le nouveau age: "));
+                    let nouveauage = parseInt(prompt("entrez le nouveau age: "));
                     candidats[i].age = nouveauage;
                     break;
                 default:
@@ -395,15 +377,31 @@ function statistiquesElection() {
     console.log(`* Nombre total de votes exprimés : ${totalvotes}`);
 
     sortcondidat();
-        console.log("\n* top 3 des candidats :");
-    let topcandidats  = 3;
-    if(candidats.length < 3){
+    console.log("\n* top 3 des candidats :");
+    let topcandidats = 3;
+    if (candidats.length < 3) {
         topcandidats = candidats.length;
     }
-    for (let i = 0; i < topcandidats ; i++) {
+    for (let i = 0; i < topcandidats; i++) {
         console.log(`  ${i + 1}. ${candidats[i].nom} ${candidats[i].prenom} | ${candidats[i].electeurs.length} votes`);
     }
-
+    //=============================number candidats par partipolitique ==============================
+    function nombreparparti() {
+        let object = {};
+        for (let i = 0; i < candidats.length; i++) {
+            if (object[candidats[i].partiPolitique] === undefined) {
+                object[candidats[i].partiPolitique] = 1;
+            }
+            else {
+                object[candidats[i].partiPolitique] += 1;
+            }
+        }
+        console.log("\n* Nombre de candidats par parti politique :");
+        for (let key in object) {
+            console.log(` -${key} : ${object[key]} condidats`);
+        }
+    }
+    nombreparparti();
 }
 //=============================== Menu choix ================================================== 
 let choix = 0;
