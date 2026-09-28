@@ -154,11 +154,9 @@ function ajoutercandidat() {
 function ajouterplucandidats() {
     console.log(`\n---ajouter plusieur candidats---`);
     let numberCondidat = parseInt(prompt("Combien de candidats voulez-vous ajouter :"));
-    let i = 0;
-    while (i < numberCondidat) {
+    for(let i = 0; i < numberCondidat;i++) {
         console.log(`     ---candidat--- ${i + 1}`);
         ajoutercandidat();
-        i++;
     }
 }
 //=================fonction kinkhtaro mnha l case librina fl affichage====================
@@ -383,7 +381,7 @@ function statistiquesElection() {
     if (candidats.length < 3) {
         topcandidats = candidats.length;
     }
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < topcandidats; i++) {
         console.log(`  ${i + 1}. ${candidats[i].nom} ${candidats[i].prenom} | ${candidats[i].electeurs.length} votes`);
     }
     //=============================number candidats par partipolitique ==============================
